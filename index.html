@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecting...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QD89HE5P0R"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QD89HE5P0R');
+    </script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <style>
+        body {font-family: system-ui, -apple-system, sans-serif; background: #f4f6f9; margin:0; display:flex; align-items:center; justify-content:center; min-height:100vh;}
+        .box {background:white; padding:40px; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.1); text-align:center; max-width:480px;}
+        h2 {margin:0 0 16px; color:#1a1a1a;}
+        p {color:#555; margin:16px 0;}
+        a {color:#0066cc; text-decoration:none;}
+        .loading {margin:20px 0; color:#888; font-size:14px;}
+    </style>
+</head>
+<body>
+<div class="box">
+    <h2>跳转中，请稍等</h2>
+    <p>即将前往：<a href="https://google.com" target="_blank">https://google.com</a></p>
+    
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAACCc9LXfBlNh2yNo" data-callback="onSuccess"></div>
+    <div class="loading" id="status">机器人验证加载中...</div>
+</div>
+
+<script>
+function onSuccess(token) {
+    document.getElementById("status").innerHTML = "验证通过，即将自动跳转...";
+    setTimeout(() => { location.href = "https://google.com"; }, 1000);
+}
+
+// 10秒超时保护（极少数网络问题）
+setTimeout(() => {
+    if (!window.location.href.includes("google.com")) {
+        document.getElementById("status").innerHTML = "验证超时，直接跳转中...";
+        location.href = "https://google.com";
+    }
+}, 10000);
+</script>
+</body>
+</html>
